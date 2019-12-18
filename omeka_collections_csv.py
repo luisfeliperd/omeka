@@ -34,9 +34,9 @@ for collection in collections:
         metadata_dict[key] = list(filter(None, metadata_dict[key]))
         
         if metadata_dict[key]:
-            collection_dict[key].append("||".join(metadata_dict[key]))
+            collection_dict[key].append("||".join(set(metadata_dict[key])))
         else:
-            collection_dict[key].append("".join(metadata_dict[key]))
+            collection_dict[key].append("".join(set(metadata_dict[key])))
 
 export_df = pd.DataFrame(collection_dict)
 export_df.to_csv('collections_omeka_export.csv')
