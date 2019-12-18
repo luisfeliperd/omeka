@@ -1,17 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
-
-
 import requests
 from collections import defaultdict
 import pandas as pd
 import time
-
-
-# In[5]:
-
 
 endpoint_collections = 'http://bdce.unb.br/api/collections'
 response = requests.get(endpoint_collections)
@@ -19,10 +12,6 @@ collections = response.json()
 metadatum_dict = {'Date':[], 'Creator':[], 'Publisher':[], 'Title':[], 'Subject':[]}
 collection_dict = defaultdict(list)
 collection_dict.update(metadatum_dict)
-
-
-# In[6]:
-
 
 for collection in collections:
     
@@ -49,16 +38,5 @@ for collection in collections:
         else:
             collection_dict[key].append("".join(metadata_dict[key]))
 
-
-# In[7]:
-
-
 export_df = pd.DataFrame(collection_dict)
 export_df.to_csv('collections_omeka_export.csv')
-
-
-# In[ ]:
-
-
-
-
